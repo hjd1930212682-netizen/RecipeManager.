@@ -11,6 +11,7 @@ namespace RecipeManagement.Core;
 public sealed class RecipeManager : IRecipeManager
 {
     private readonly Dictionary<int, Recipe> _recipes = new();
+    private readonly List<string> _shoppingList = new();
 
     public RecipeManager(IEnumerable<Recipe> recipes)
     {
@@ -26,7 +27,7 @@ public sealed class RecipeManager : IRecipeManager
     }
 
     public int RecipeCount => _recipes.Count;
-    public int ShoppingItemCount => 0;
+    public int ShoppingItemCount => _shoppingList.Count;
     public int CookingPlanCount => 0;
     public int PendingInstructionCount => 0;
     public int RemovedRecipeCount => 0;
@@ -43,14 +44,16 @@ public sealed class RecipeManager : IRecipeManager
 
     public bool RemoveRecipe(int recipeId) => _recipes.Remove(recipeId);
 
-    public int AddIngredientsToShoppingList(int recipeId) =>
-        throw new NotImplementedException("Part A: implement AddIngredientsToShoppingList.");
+    public int AddIngredientsToShoppingList(int recipeId)
+    {
+        if (!_recipes.TryGetValue(recipeId, out var recipe)) return 0;
+        _shoppingList.AddRange(recipe.Ingredients);
+        return recipe.Ingredients.Count;
+    }
 
-    public IReadOnlyList<string> GetShoppingList() =>
-        throw new NotImplementedException("Part A: implement GetShoppingList.");
+    public IReadOnlyList<string> GetShoppingList() => _shoppingList.ToArray();
 
-    public void ClearShoppingList() =>
-        throw new NotImplementedException("Part A: implement ClearShoppingList.");
+    public void ClearShoppingList() => _shoppingList.Clear();
 
     public bool AddRecipeToCookingPlan(int recipeId) =>
         throw new NotImplementedException("Part A: implement AddRecipeToCookingPlan.");
