@@ -1,40 +1,22 @@
-# Recipe Management System — Student Starter
+# Recipe Management System — Part A
 
-Starter repository for Parts A and B. Implement `RecipeManager` in Core; the Application menu and JSON loader are supplied.
+This solution uses the supplied Application, Core model, JSON loader, and test project. `RecipeManagement.Core/RecipeManager.cs` implements the five Part A collections and their methods. The Part B methods remain starter placeholders because Part B is outside this submission.
 
-## What is supplied
+## Build, test, and run
 
-- `RecipeManagement.Core/Models/` — recipe model classes
-- `RecipeManagement.Core/RecipeLoader.cs` — reads `data/recipes.json`
-- `RecipeManagement.Core/IRecipeManager.cs` — public API
-- `RecipeManagement.Application/` — console menu (options labelled PartA / PartB)
-- `RecipeManagement.Tests/` — example tests
-- `data/recipes.json` — recipe dataset
+From this folder, with the .NET 10 SDK installed:
 
-## What you implement
-
-**Part A** — `RecipeManager.cs` using:
-
-- `Dictionary<int, Recipe>`
-- `List<string>`
-- `LinkedList<int>`
-- `Stack<int>`
-- `Queue<string>`
-
-**Part B** — LINQ searches, protein report, saved-recipe collection, `Design.md`, and more tests.
-
-## Build and run
-
-Open `StudentPackage/RecipeManagement.sln`:
-
-```bash
-dotnet build
-dotnet test
+```powershell
+dotnet build RecipeManagement.sln
+dotnet test RecipeManagement.sln
 dotnet run --project RecipeManagement.Application -- data/recipes.json
 ```
 
-Until you implement `RecipeManager`, menu options print a **Not implemented** message.
+The console application expects an interactive terminal. The supplied menu uses `Console.Clear()` and may fail when its output is redirected to a pipe.
 
-## AI acknowledgement
+## Project layout
 
-Include the required AI acknowledgement statement in your submission as described in the assignment specification.
+- `RecipeManagement.Core/` — supplied models, loader, interface, and Part A manager implementation.
+- `RecipeManagement.Application/` — supplied console menu.
+- `RecipeManagement.Tests/` — supplied examples and additional xUnit tests for each collection and an integrated workflow.
+- `data/recipes.json` — supplied example data.
